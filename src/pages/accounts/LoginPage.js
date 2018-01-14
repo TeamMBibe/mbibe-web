@@ -13,7 +13,7 @@ const LoginPage = observer(class LoginPage extends Component {
         return (
             <div>
                 <MediaQuery minDeviceWidth={1224}>
-                    <DesktopLoginPage />
+                    <MobileLoginPage />
                 </MediaQuery>
                 <MediaQuery maxDeviceWidth={1224}>
                     <MobileLoginPage />
