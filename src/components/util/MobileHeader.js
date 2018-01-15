@@ -19,6 +19,17 @@ const MobileHeader = observer(class MobileHeader extends Component {
         e.stopPropagation();
     }
 
+    handleLeaveRequest = (e) =>  {
+        userStore.leaveArea();
+        e.stopPropagation();
+    }
+
+    handleSignOutRequest = (e) =>  {
+        userStore.signUserOut();
+        this.props.history.push('/login');
+        e.stopPropagation();
+    }
+
     render() {
       console.log(userStore.memberObject);
         return (
@@ -30,12 +41,12 @@ const MobileHeader = observer(class MobileHeader extends Component {
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
                     onClick={this.handleToggle}
                 >
-                    <div style={pointStyle}>Points: 0</div>
+                    <div style={pointStyle}>Points: {userStore.memberObject.Points.N}</div>
                 </AppBar>
 
                 <Drawer open={headerStore.drawerOpen}>
-                    <MenuItem>Menu Item</MenuItem>
-                    <MenuItem>Menu Item 2</MenuItem>
+                    <MenuItem onClick={this.handleLeaveRequest}>Leave {userStore.businessObject.BusinessName.S}</MenuItem>
+                    <MenuItem onClick={this.handleSignOutRequest}>Log Out</MenuItem>
                 </Drawer>
                 <div style={{width:'100%',height:'90px'}}></div>
             </div>
