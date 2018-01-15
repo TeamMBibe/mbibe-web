@@ -5,8 +5,8 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import AppBar from 'material-ui/AppBar';
 import headerStore from '../../data_stores/HeaderStore'
+import userStore from '../../data_stores/UserStore'
 import { withRouter, Redirect } from 'react-router'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const MobileHeader = observer(class MobileHeader extends Component {
 
@@ -16,16 +16,17 @@ const MobileHeader = observer(class MobileHeader extends Component {
 
     handleToggle = (e) =>  {
         headerStore.updateDrawerStatus(!headerStore.drawerOpen);
-        //e.stopPropagation();
+        e.stopPropagation();
     }
 
     render() {
+      console.log(userStore.memberObject);
         return (
             <div>
 
                 <AppBar
                     style={{ position: "fixed", height:'100px'}}
-                    title="Title"
+                    title={userStore.businessObject.BusinessName.S}
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
                     onClick={this.handleToggle}
                 >

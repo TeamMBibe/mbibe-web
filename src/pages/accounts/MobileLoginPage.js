@@ -12,7 +12,7 @@ const MobileLoginPage = observer(class MobileLoginPage extends Component {
   constructor(props) {
       super(props);
       this.state = {
-          stage:"SIGNIN",
+          stage:props.registrationStage,
       }
   }
 
@@ -23,14 +23,15 @@ const MobileLoginPage = observer(class MobileLoginPage extends Component {
 
     render() {
         var component = this.state.stage;
+        console.log(this.props);
         return (
           <div>
               {component === 'SIGNIN' ? (
-                  <LoginFormComponent onHandleStage={this.handleStage}/>
+                  <LoginFormComponent history={this.props.history} onHandleStage={this.handleStage}/>
               ) : component === 'CREATEACCOUNT' ? (
-                  <CreateAccountComponent onHandleStage={this.handleStage} />
+                  <CreateAccountComponent history={this.props.history} onHandleStage={this.handleStage} />
               ) : component === 'VERIFY' ? (
-                  <VerifyAccountComponent onHandleStage={this.handleStage} />
+                  <VerifyAccountComponent history={this.props.history} onHandleStage={this.handleStage} />
               ) : null}
           </div>
         );

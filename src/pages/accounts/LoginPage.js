@@ -9,14 +9,20 @@ import DesktopLoginPage from './DesktopLoginPage'
 
 const LoginPage = observer(class LoginPage extends Component {
 
+    constructor(props) {
+      super(props)
+    }
+
     render() {
+      console.log('here')
+      console.log(this.props)
         return (
             <div>
                 <MediaQuery minDeviceWidth={1224}>
-                    <MobileLoginPage />
+                    <MobileLoginPage history={this.props.history} registrationStage={this.props.registrationStage}/>
                 </MediaQuery>
                 <MediaQuery maxDeviceWidth={1224}>
-                    <MobileLoginPage />
+                    <MobileLoginPage history={this.props.history} registrationStage={this.props.registrationStage}/>
                 </MediaQuery>
             </div>
         );
