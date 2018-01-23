@@ -15,6 +15,7 @@ import accountManagement from '../components/management/AccountManagement'
 import areaCustomization from '../components/util/AreaCustomization'
 import AreaMenuComponent from '../components/profile/AreaMenuComponent'
 import AppProfileManager from '../components/profile/AppProfileManager'
+import AreaInfoComponent from '../components/area/AreaInfoComponent'
 
 const MasterPlacePage = observer(class MasterPlacePage extends Component {
 
@@ -79,6 +80,7 @@ const MasterPlacePage = observer(class MasterPlacePage extends Component {
             <Route exact path="/place/:location" render={routeProps => <AppProfileManager {...routeProps} history={this.props.history} />} />
             <Route exact path="/place/:location/menu" render={routeProps => <AreaMenuComponent {...routeProps} history={this.props.history} />} />
             <Route exact path="/place/:location/menu/:title" render={routeProps => <AreaMenuComponent {...routeProps} history={this.props.history} />} />
+            <Route exact path="/place/:location/info" render={routeProps => <AreaInfoComponent {...routeProps} history={this.props.history} />} />
             <Route exact path="*" component={GenericNotFound} />
           </Switch>
         </MuiThemeProvider>

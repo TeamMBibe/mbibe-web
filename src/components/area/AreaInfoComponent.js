@@ -7,6 +7,7 @@ import areaManagement from '../management/AreaManagement'
 import userStore from '../../data_stores/UserStore'
 import headerStore from '../../data_stores/HeaderStore'
 import Divider from 'material-ui/Divider';
+import Paper from 'material-ui/Paper';
 
 const AreaInfoComponent = observer(class AreaInfoComponent extends Component {
 
@@ -14,80 +15,34 @@ const AreaInfoComponent = observer(class AreaInfoComponent extends Component {
       super(props)
     }
 
-    renderMenu() {
-      if(!this.props.match.params.title && Object.keys(userStore.businessObject.Menus.M).length > 1) {
-        return (Object.keys(userStore.businessObject.Menus.M).map((tile) => (
-                    <RaisedButton
-                        label={tile}
-                        style={styles.loginButtonStyle}/>
-                  )))
-      } else if(Object.keys(userStore.businessObject.Menus.M).length === 1) {
-        const obj = userStore.businessObject.Menus.M[0].M;
-        return (Object.keys(userStore.businessObject.Menus.M[0].M).map((key) => {
-          this.renderMenuSection(key, obj[key])
-        }));
-      } else if(this.props.match.params.title) {
-        const obj = userStore.businessObject.Menus.M[this.props.match.params.title].M;
-        return (Object.keys(userStore.businessObject.Menus.M[this.props.match.params.title].M).map((key) => {
-          return (
-            <div>
-              <GridList
-                cellHeight={50}
-                style={styles.gridList}>
-                {this.renderMenuSection(key, obj[key])}
-              </GridList>
-              <Divider />
-            </div>
-        )
-        }));
-      } else {
-        return (<div>Other Options</div>)
-      }
-    }
-
-    renderMenuSection(sectionName, sectionObject) {
-      console.log(sectionName, sectionObject)
-      const ht = sectionObject.L.map((item) => {
-            return (<GridTile
-              key={item.M.name.S}
-              title={item.M.name.S}
-              cols={2}
-              rows={1}
-              subtitle={item.M.amount.N}>
-            </GridTile>)
-          })
-          console.log(ht);
-          return ht
+    renderAreaHours() {
+      console.log(userStore.businessObject.Hours.M)
+      return (Object.keys(userStore.businessObject.Hours.M).map(key => {
+        return (<div>{key}: {userStore.businessObject.Hours.M[key].S}</div>)
+      }))
     }
 
     render() {
-      const t = this.renderMenu();
+      const t = this.renderAreaHours();
       console.log(t)
       return (
-          <div>
+          <div style={{width:'100%', height:'auto'}}>
             <MuiThemeProvider>
-              {this.renderMenu()}
+              <Paper style={style} zDepth={3}>
+                {this.renderAreaHours()}
+              </Paper>
             </MuiThemeProvider>
           </div>
       );
     }
 });
 
-const styles = {
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-    },
-    gridList: {
-        width: '100%',
-        height: '80%',
-        overflowY: 'auto',
-        margin:'2%'
-    },
-    loginButtonStyle: {
-        width:'100%',
-    }
+const style = {
+  height: 'auto',
+  width: '90%',
+  margin: '5%',
+  textAlign: 'center',
+  display: 'inline-block',
 };
 
 

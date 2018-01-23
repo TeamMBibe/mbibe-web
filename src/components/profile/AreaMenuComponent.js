@@ -46,7 +46,6 @@ const AreaMenuComponent = observer(class AreaMenuComponent extends Component {
     }
 
     renderMenuSection(sectionName, sectionObject) {
-      console.log(sectionName, sectionObject)
       const ht = sectionObject.L.map((item) => {
             return (<GridTile
               key={item.M.name.S}
@@ -61,8 +60,6 @@ const AreaMenuComponent = observer(class AreaMenuComponent extends Component {
     }
 
     render() {
-      const t = this.renderMenu();
-      console.log(t)
       return (
           <div>
             <MuiThemeProvider>
