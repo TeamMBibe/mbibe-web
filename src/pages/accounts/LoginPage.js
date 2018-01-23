@@ -14,7 +14,6 @@ const LoginPage = observer(class LoginPage extends Component {
     }
 
     render() {
-      console.log('here')
       console.log(this.props)
         return (
             <div>

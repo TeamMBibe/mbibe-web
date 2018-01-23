@@ -6,9 +6,14 @@ class HeaderStore {
 
         extendObservable(this, {
             drawerOpen: false,
+            headerTitle: "Untitled",
 
             updateDrawerStatus (isOpenStatus) {
                 this.drawerOpen = isOpenStatus;
+            },
+
+            updateHeaderTitle (title) {
+                this.headerTitle = title;
             },
 
             forceDrawerClose () {

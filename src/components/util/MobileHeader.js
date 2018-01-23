@@ -21,13 +21,31 @@ const MobileHeader = observer(class MobileHeader extends Component {
 
     handleLeaveRequest = (e) =>  {
         userStore.leaveArea();
+        this.props.history.push('/profile');
+        headerStore.updateDrawerStatus(!headerStore.drawerOpen);
         e.stopPropagation();
     }
 
     handleSignOutRequest = (e) =>  {
         userStore.signUserOut();
         this.props.history.push('/login');
+        headerStore.updateDrawerStatus(!headerStore.drawerOpen);
         e.stopPropagation();
+    }
+
+    handleMenuSelection = (menu, e) =>  {
+      this.props.history.push('/place/' + userStore.businessObject.BusinessName.S + '/menu/' + menu);
+      headerStore.updateDrawerStatus(!headerStore.drawerOpen);
+        e.stopPropagation();
+    }
+
+    renderMenuItems() {
+      console.log(userStore.businessObject.Menus.M)
+      return Object.keys(userStore.businessObject.Menus.M).map((type) => {
+            return (
+                <MenuItem onClick={this.handleMenuSelection.bind(null, type)}>{type}</MenuItem>
+            )
+        })
     }
 
     render() {
@@ -37,7 +55,7 @@ const MobileHeader = observer(class MobileHeader extends Component {
 
                 <AppBar
                     style={{ position: "fixed", height:'100px'}}
-                    title={userStore.businessObject.BusinessName.S}
+                    title={headerStore.headerTitle}
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
                     onClick={this.handleToggle}
                 >
@@ -45,6 +63,7 @@ const MobileHeader = observer(class MobileHeader extends Component {
                 </AppBar>
 
                 <Drawer open={headerStore.drawerOpen}>
+                    {this.renderMenuItems()}
                     <MenuItem onClick={this.handleLeaveRequest}>Leave {userStore.businessObject.BusinessName.S}</MenuItem>
                     <MenuItem onClick={this.handleSignOutRequest}>Log Out</MenuItem>
                 </Drawer>
