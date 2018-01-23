@@ -34,8 +34,8 @@ const VerifyAccountComponent = observer(class VerifyAccountComponent extends Com
   handleSubmit = async event => {
       event.preventDefault();
       try {
-          await accountManagement.verify(this.state.email, this.state.verificationCode)
-          this.props.onHandleStage('SIGNIN');
+        await accountManagement.verify(this.state.email, this.state.verificationCode)
+        this.props.history.push('/login')
       } catch (e) {
           alert(e);
       }

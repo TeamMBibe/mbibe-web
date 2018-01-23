@@ -7,7 +7,8 @@ import MobileHeader from "../../components/util/MobileHeader"
 import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
-import mainLogo from '../../mbibe_icon.png'
+import mainLogo from '../../assets/mbibe_icon.png'
+import Background from '../../assets/login_background.png'
 import accountManagement from '../management/AccountManagement'
 
 const CreateAccountComponent = observer(class CreateAccountComponent extends Component {
@@ -39,7 +40,7 @@ const CreateAccountComponent = observer(class CreateAccountComponent extends Com
       event.preventDefault();
       try {
           await accountManagement.signup(this.state.email, this.state.password, this.state.phone)
-          this.props.onHandleStage('VERIFY');
+          this.props.history.push('/verify-account')
       } catch (e) {
           alert(e);
       }
@@ -51,15 +52,17 @@ const CreateAccountComponent = observer(class CreateAccountComponent extends Com
         <div style={styles.pageStyle}>
           <MuiThemeProvider>
             <div className="row">
-                <img src={mainLogo} className="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-5 col-md-2 col-md-offset-5" style={{marginTop:'15px'}}/>
+                <img src={mainLogo} className="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-5 col-md-2 col-md-offset-5" style={{marginTop:'15px', marginBottom:'20px'}}/>
             </div>
 
               <form onSubmit={this.handleSubmit}>
                   <FormGroup controlId="email" bsSize="large" className="row">
-                      <div className="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                      <div className="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1" style={{padding:0}}>
                           <TextField
                               hintText="E-mail"
-                              style={{width:'100%'}}
+                              style={{width:'100%', height:'50px'}}
+                              hintStyle={styles.hintBoxStyle}
+                              inputStyle={styles.textBoxStyle}
                               underlineStyle={styles.underlineStyle}
                               defaultValue={this.state.email}
                               onChange={this.handleChange}
@@ -70,12 +73,14 @@ const CreateAccountComponent = observer(class CreateAccountComponent extends Com
                   </FormGroup>
 
                   <FormGroup controlId="password" bsSize="large" className="row">
-                      <div className="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                      <div className="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1" style={{padding:0}}>
                           <TextField hintText="Password"
                               value={this.state.password}
                               onChange={this.handleChange}
+                              hintStyle={styles.hintBoxStyle}
+                              inputStyle={styles.textBoxStyle}
                               underlineStyle={styles.underlineStyle}
-                              style={{width:'100%'}}
+                              style={{width:'100%', height:'50px'}}
                               type="password"
                               id="password">
                           </TextField>
@@ -83,12 +88,14 @@ const CreateAccountComponent = observer(class CreateAccountComponent extends Com
                   </FormGroup>
 
                   <FormGroup controlId="confirmpassword" bsSize="large" className="row">
-                      <div className="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                      <div className="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1" style={{padding:0}}>
                           <TextField hintText="Confirm Password"
                               value={this.state.confirmPassword}
                               onChange={this.handleChange}
+                              hintStyle={styles.hintBoxStyle}
+                              inputStyle={styles.textBoxStyle}
                               underlineStyle={styles.underlineStyle}
-                              style={{width:'100%'}}
+                              style={{width:'100%', height:'50px'}}
                               type="password"
                               id="confirmPassword">
                           </TextField>
@@ -96,12 +103,14 @@ const CreateAccountComponent = observer(class CreateAccountComponent extends Com
                   </FormGroup>
 
                   <FormGroup controlId="phone" bsSize="large" className="row">
-                      <div className="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+                      <div className="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1" style={{padding:0}}>
                           <TextField hintText="Phone"
                               value={this.state.phone}
                               onChange={this.handleChange}
+                              hintStyle={styles.hintBoxStyle}
+                              inputStyle={styles.textBoxStyle}
                               underlineStyle={styles.underlineStyle}
-                              style={{width:'100%'}}
+                              style={{width:'100%', height:'50px'}}
                               type="telephone"
                               id="phone">
                           </TextField>
@@ -109,11 +118,13 @@ const CreateAccountComponent = observer(class CreateAccountComponent extends Com
                   </FormGroup>
 
                   <div className="row">
-                    <div className="col-xs-4 col-xs-offset-1 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4">
+                    <div className="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1" style={{padding:0}}>
                         <RaisedButton
-                            primary={true}
                             label="Create"
-                            style={styles.loginButtonStyle}
+                            buttonStyle={styles.loginButtonStyle}
+                            overlayStyle={styles.loginButtonStyle}
+                            style={{width:'100%', borderRadius:'100px'}}
+                            backgroundColor="#FFAD0A"
                             type="submit"
                             disabled={!this.validateForm()}/>
                     </div>
@@ -130,16 +141,33 @@ const styles = {
       marginTop:'50px'
   },
   pageStyle: {
-      backgroundColor: '#FFAD0A',
+    backgroundImage: `url(${ Background })`,
+     backgroundRepeat  : 'no-repeat',
+     backgroundPosition: 'center',
       height: '100vh',
       width: '100vw',
+  },
+  hintBoxStyle: {
+    textAlign:'center',
+    color:'#DCDCDC',
+    width:'100%'
+  },
+  textBoxStyle : {
+    borderColor: "#373536",
+    borderWidth:'1px',
+    borderStyle:'solid',
+    borderRadius:'100px',
+    width:'100%',
+    color:'#373536',
+    textAlign:'center',
+    opacity:'0.8'
   },
   errorStyle: {
       color: "#FF00FF",
   },
   underlineStyle: {
       borderColor: "#373536",
-      borderWidth:'1px'
+      borderWidth:'0px'
   },
   floatingLabelStyle: {
       color: "#FF00FF",
@@ -148,7 +176,11 @@ const styles = {
       color: "#FF00FF",
   },
   loginButtonStyle: {
-      width:'100%',
+      borderRadius:'100px'
+  },
+  optionButtonStyle: {
+    fontSize:'10px',
+    width:'100%'
   }
 };
 

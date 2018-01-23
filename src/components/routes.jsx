@@ -12,6 +12,7 @@ const routes = (
             <Route exact path="/" component={MasterHomePage} />
             <Route path="/login" component={MasterHomePage} />
             <Route path="/create-account" component={MasterHomePage} />
+            <Route path="/verify" component={MasterHomePage} />
             <Route path="/profile" component={MasterProfilePage} />
             <Route path="/place/:location" component={MasterPlacePage} />
             <Route path="*" component={GenericNotFound} />
