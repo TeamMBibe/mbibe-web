@@ -22,7 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "predeploy": "react-scripts build",
-    "deploy": "aws cp build s3://mbibereact-hosting-mobilehub-1443375150 --recursive",
+    "deploy": "",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

@@ -12,7 +12,7 @@ import mainLogo from '../../assets/mbibe_icon.png'
 import Background from '../../assets/login_background.png'
 import accountManagement from '../management/AccountManagement'
 
-const LoginFormComponent = observer(class LoginFormComponent extends Component {
+const LoginComponent = observer(class LoginComponent extends Component {
 
   constructor(props) {
       super(props);
@@ -20,19 +20,6 @@ const LoginFormComponent = observer(class LoginFormComponent extends Component {
           email: "",
           password: "",
       };
-  }
-
-  componentWillMount() {
-    this.isLoggedIn();
-  }
-
-  async isLoggedIn() {
-    try {
-      let email = await accountManagement.isLoggedIn();
-      if(email) this.props.history.push('/profile')
-    } catch(err) {
-      return null;
-    }
   }
 
   validateForm() {
@@ -46,14 +33,14 @@ const LoginFormComponent = observer(class LoginFormComponent extends Component {
   }
 
   handleCreateButtonOnClick = event => {
-      this.props.history.push('/create-account')
+      this.props.history.push('/account/create-account')
   }
 
   handleSubmit = async event => {
       event.preventDefault();
       try {
           let user = await accountManagement.login(this.state.email, this.state.password)
-          this.props.history.push('/profile')
+          this.props.history.push('/b')
       } catch (e) {
           alert(e);
       }
@@ -192,4 +179,4 @@ const styles = {
 
 
 
-export default LoginFormComponent;
+export default LoginComponent;

@@ -7,6 +7,7 @@ import MobileHeader from "../../components/util/MobileHeader"
 import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import mainLogo from '../../assets/mbibe_icon.png'
 import Background from '../../assets/login_background.png'
 import accountManagement from '../management/AccountManagement'
@@ -34,6 +35,10 @@ const CreateAccountComponent = observer(class CreateAccountComponent extends Com
       this.setState({
           [event.target.id]: event.target.value
       });
+  }
+
+  handleSignInButtonOnClick = event => {
+      this.props.history.push('/login')
   }
 
   handleSubmit = async event => {
@@ -129,6 +134,15 @@ const CreateAccountComponent = observer(class CreateAccountComponent extends Com
                             disabled={!this.validateForm()}/>
                     </div>
                 </div>
+                <div className="row">
+                    <div className="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4" style={{padding:0}}>
+                        <FlatButton
+                            label="Have An Account?"
+                            onClick={this.handleSignInButtonOnClick}
+                            style={{width:'100%'}}
+                            labelStyle={styles.optionButtonStyle} />
+                    </div>
+                </div>
               </form>
             </MuiThemeProvider>
           </div>
@@ -159,6 +173,7 @@ const styles = {
     borderRadius:'100px',
     width:'100%',
     color:'#373536',
+    backgroundColor:"rgba(55, 53, 54, 0.3)",
     textAlign:'center',
     opacity:'0.8'
   },

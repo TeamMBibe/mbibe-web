@@ -18,13 +18,15 @@ class UserStore {
             leaveArea() {
               this.businessObject = null;
               this.memberObject = null;
-              localStorage.getItem('selectedAreaMemberProfile', null)
-              localStorage.setItem('selectedArea', null)
+              localStorage.getItem('selectedBusinessMemberProfile', null)
+              localStorage.setItem('selectedBusiness', null)
             },
 
             signUserOut() {
               if(this.user) {
                 this.user.signOut();
+                localStorage.getItem('selectedBusinessMemberProfile', null)
+                localStorage.setItem('selectedBusiness', null)
               }
             },
         });
